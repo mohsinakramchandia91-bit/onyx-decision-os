@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONYX Decision OS v1.0 | Offline AI Decision Intelligence</title>
+    
+    <!-- SEO & OpenGraph -->
+    <meta name="description" content="ONYX Decision OS v1.0. The premier Offline AI Decision Intelligence Platform for enterprise analytics and private AI solutions.">
+    <meta name="keywords" content="Offline AI, Decision Intelligence Software, Enterprise AI Platform, Private AI Analytics">
+    <meta property="og:title" content="ONYX Decision OS v1.0">
+    <meta property="og:description" content="Enterprise-grade offline AI decision intelligence.">
+    <meta property="og:type" content="website">
+    
+    <!-- Schema.org SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "ONYX Decision OS v1.0",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "499.00",
+        "priceCurrency": "USD"
+      },
+      "description": "Offline AI Decision Intelligence Platform for enterprise."
+    }
+    </script>
+
+    <!-- Tailwind CSS (No build tools required) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Tailwind Configuration for ONYX Theme -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        onyx: { bg: '#05070d', accent: '#00e5ff', surface: 'rgba(255, 255, 255, 0.03)', border: 'rgba(255, 255, 255, 0.08)' }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 15px rgba(0, 229, 255, 0.5)',
+                        'neon-strong': '0 0 25px rgba(0, 229, 255, 0.8)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Global & Scrollbar */
+        body { background-color: #05070d; color: #ffffff; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #05070d; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 229, 255, 0.6); }
+
+        /* Glassmorphism & Animations */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glow-text { text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); }
+        .hover-glow:hover {
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+            border-color: #00e5ff;
+            transition: all 0.3s ease;
+        }
+        
+        /* Terminal / Log effect */
+        .terminal-log { font-family: 'Courier New', Courier, monospace; color: #00e5ff; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .cursor { display: inline-block; width: 8px; height: 16px; background-color: #00e5ff; animation: blink 1s step-end infinite; }
+
+        /* AI Scanner Line */
+        .scanner-container { position: relative; overflow: hidden; }
+        .scanner-line {
+            position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: #00e5ff; box-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
+            animation: scan 2s linear infinite; opacity: 0.7;
+        }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* Hide views by default */
+        .view { display: none; animation: fadeIn 0.4s ease-out; }
+        .view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="antialiased selection:bg-onyx-accent selection:text-onyx-bg flex flex-col min-h-screen">
+
+    <!-- Global Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b-0 border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 cursor-pointer flex items-center gap-3" onclick="navigate('home')">
+                    <div class="w-8 h-8 rounded-sm bg-gradient-to-br from-onyx-accent to-blue-900 flex items-center justify-center shadow-neon">
+                        <i class="fa-solid fa-layer-group text-onyx-bg text-sm"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-wider text-white">ONYX <span class="text-onyx-accent font-light">OS</span></span>
+                    <span class="ml-2 text-[10px] px-1.5 py-0.5 border border-onyx-accent/50 text-onyx-accent rounded uppercase tracking-widest">v1.0</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <button onclick="navigate('product')" class="text-gray-300 hover:text-onyx-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">Product</button>
+                        <button onclick="navigate('security')" class="text-gray-300 hover:text-onyx-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">Security</button>
+                        <button onclick="navigate('pricing')" class="text-gray-300 hover:text-onyx-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">Pricing</button>
+                        <button onclick="navigate('analyze')" class="text-gray-300 hover:text-onyx-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">CSV Engine</button>
+                        <button onclick="navigate('client-portal')" class="text-gray-300 hover:text-onyx-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">Portal</button>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="hidden md:flex items-center gap-4">
+                    <button onclick="navigate('auto-demo')" class="text-white border border-white/20 hover:border-onyx-accent px-5 py-2 rounded text-sm font-medium transition-all">Try Demo</button>
+                    <a href="https://onyxdecision.gumroad.com/l/hdzwvf" target="_blank" class="bg-onyx-accent text-onyx-bg hover:bg-white hover:shadow-neon px-5 py-2 rounded text-sm font-bold transition-all">Buy License</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-20">
+
+        <!-- ==================== HOME VIEW ==================== -->
+        <div id="view-home" class="view active">
+            <!-- Hero Section -->
+            <div class="relative overflow-hidden">
+                <div class="absolute inset-0 z-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at 50% 50%, #00e5ff 0%, transparent 50%); mix-blend-mode: screen;"></div>
+                
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 relative z-10 text-center">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel border-onyx-accent/30 text-onyx-accent text-xs font-semibold uppercase tracking-widest mb-8">
+                        <span class="w-2 h-2 rounded-full bg-onyx-accent animate-pulse"></span>
+                        Production Ready - ONYX Decision OS v1.0
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+                        Enterprise <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Intelligence.</span><br>
+                        <span class="text-onyx-accent glow-text">Zero Cloud Dependency.</span>
+                    </h1>
+                    
+                    <p class="mt-4 max-w-2xl text-lg md:text-xl text-gray-400 mx-auto mb-10 font-light">
+                        The Palantir-grade offline AI analytics engine for high-trust environments. Process sensitive corporate data, generate strategic insights, and forecast growth—entirely on your local hardware.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="https://onyxdecision.gumroad.com/l/hdzwvf" target="_blank" class="bg-onyx-accent text-onyx-bg px-8 py-4 rounded font-bold text-lg hover:bg-white hover:shadow-neon transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-key"></i> Acquire Enterprise License
+                        </a>
+                        <button onclick="navigate('auto-demo')" class="glass-panel text-white border-white/20 hover:border-onyx-accent px-8 py-4 rounded font-medium text-lg transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-terminal"></i> Initialize Auto-Demo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dashboard Preview Graphic -->
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+                    <div class="glass-panel rounded-xl overflow-hidden border border-white/10 shadow-2xl relative">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-onyx-accent to-transparent opacity-50"></div>
+                        <!-- Mac-like Header -->
+                        <div class="bg-black/40 px-4 py-3 flex items-center border-b border-white/5">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                            </div>
+                            <div class="mx-auto text-xs text-gray-500 font-mono">onyx_core_engine_v1.0.exe</div>
+                        </div>
+                        <!-- Interface -->
+                        <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#020305]">
+                            <div class="col-span-2 space-y-4">
+                                <div class="h-48 rounded border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-4 flex flex-col justify-end relative">
+                                    <div class="absolute top-4 left-4 text-xs font-mono text-gray-500">REVENUE PROJECTION TENSOR</div>
+                                    <svg viewBox="0 0 100 30" class="w-full h-24 stroke-onyx-accent fill-none stroke-2">
+                                        <path d="M0,30 Q10,25 20,28 T40,15 T60,20 T80,5 T100,0" style="filter: drop-shadow(0 0 4px #00e5ff);"/>
+                                    </svg>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="h-24 rounded border border-white/5 bg-white/[0.01] p-4">
+                                        <div class="text-xs text-gray-500 mb-1">RISK COEFFICIENT</div>
+                                        <div class="text-2xl text-white">0.041 <span class="text-green-400 text-sm">↓ Safe</span></div>
+                                    </div>
+                                    <div class="h-24 rounded border border-white/5 bg-white/[0.01] p-4">
+                                        <div class="text-xs text-gray-500 mb-1">DECISION CONFIDENCE</div>
+                                        <div class="text-2xl text-onyx-accent glow-text">98.7%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border border-white/5 rounded bg-black/20 p-4 font-mono text-xs text-gray-400">
+                                <div class="text-onyx-accent mb-2">> SYS_LOG_ACTIVE</div>
+                                <div class="opacity-50">> Ingesting market data...</div>
+                                <div class="opacity-50">> Isolating variables...</div>
+                                <div class="opacity-50">> Running Monte Carlo sim...</div>
+                                <div class="text-white mt-2">> STRATEGY GENERATED.</div>
+                                <div class="mt-4 p-2 bg-onyx-accent/10 border border-onyx-accent/20 rounded text-onyx-accent">
+                                    RECOMMENDATION: Allocate 14% cap-ex to R&D sector B to outpace competitor threshold by Q3.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== PRODUCT VIEW ==================== -->
+        <div id="view-product" class="view">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                <div class="text-center max-w-3xl mx-auto mb-20">
+                    <h2 class="text-sm font-bold text-onyx-accent tracking-widest uppercase mb-3">Core Architecture</h2>
+                    <h3 class="text-4xl font-bold mb-6">Built for Executive Dominance.</h3>
+                    <p class="text-gray-400 text-lg font-light">ONYX Decision OS v1.0 does not rely on external APIs. It is a self-contained intelligence matrix designed for deployment on highly secure, air-gapped corporate networks.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="glass-panel p-8 rounded-xl hover-glow cursor-default group transition-all">
+                        <div class="w-12 h-12 rounded bg-onyx-accent/10 flex items-center justify-center text-onyx-accent mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-microchip text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-3">Offline AI Processing</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Operate completely detached from the internet. Your proprietary data never leaves your local machine, ensuring absolute compliance with defense and financial sector regulations.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="glass-panel p-8 rounded-xl hover-glow cursor-default group transition-all">
+                        <div class="w-12 h-12 rounded bg-onyx-accent/10 flex items-center justify-center text-onyx-accent mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-network-wired text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-3">Neural CSV Parser</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Drop massive corporate datasets directly into the engine. ONYX instantly identifies correlations, anomalies, and revenue bottlenecks without requiring a data science team.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="glass-panel p-8 rounded-xl hover-glow cursor-default group transition-all">
+                        <div class="w-12 h-12 rounded bg-onyx-accent/10 flex items-center justify-center text-onyx-accent mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-chess-knight text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-3">Strategic Action Matrix</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Stop looking at raw numbers. ONYX translates data into executive English, providing direct "Do This" recommendations with attached probability confidence scores.</p>
+                    </div>
+                </div>
+
+                <div class="mt-20 text-center">
+                    <a href="https://onyxdecision.gumroad.com/l/hdzwvf" target="_blank" class="bg-white text-black px-8 py-3 rounded font-bold hover:bg-onyx-accent transition-colors">Obtain Software Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SECURITY VIEW ==================== -->
+        <div id="view-security" class="view">
+             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel border-red-500/30 text-red-400 text-xs font-semibold uppercase tracking-widest mb-6">
+                            <i class="fa-solid fa-shield-halved"></i> Zero Trust Architecture
+                        </div>
+                        <h2 class="text-4xl font-bold mb-6">Your data is your weapon.<br>Keep it locked down.</h2>
+                        <p class="text-gray-400 mb-6 font-light text-lg">
+                            Cloud-based AI models train on your prompts. They leak your proprietary strategies. ONYX Decision OS v1.0 was built with a paranoid security model inspired by defense contractors.
+                        </p>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-onyx-accent mt-1"></i>
+                                <div>
+                                    <strong class="block text-white">Air-Gap Ready</strong>
+                                    <span class="text-sm text-gray-500">Requires exactly zero bytes of inbound/outbound internet traffic to function.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-onyx-accent mt-1"></i>
+                                <div>
+                                    <strong class="block text-white">No Telemetry</strong>
+                                    <span class="text-sm text-gray-500">We do not track your usage. We do not know what you analyze. Total opacity.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-onyx-accent mt-1"></i>
+                                <div>
+                                    <strong class="block text-white">Local Execution</strong>
+                                    <span class="text-sm text-gray-500">All models and parsers run purely in your browser's local sandbox or V8 engine.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-onyx-accent/5 blur-3xl rounded-full"></div>
+                        <div class="glass-panel p-2 rounded-xl relative border-white/10">
+                            <div class="bg-black rounded-lg p-6 border border-white
